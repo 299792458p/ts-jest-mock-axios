@@ -8,7 +8,7 @@ export interface VerifyDiscountResponse {
 
 export const calculatePrice = async (persons: number): Promise<number> => {
     const pricePerPerson = 340
-    persons = persons < 0 ? 0 : persons
+    persons = persons < 0 ? 0 : Math.floor(persons)
     const { data } = await axios.get<VerifyDiscountResponse>(`/verify-discount?amount=${persons}`)
     const hasDiscount = data.hasDiscount
     const groups = hasDiscount ? (persons / personsPerGroup) : 0
